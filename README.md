@@ -67,6 +67,7 @@ The following guides illustrate how to use some features concretely:
 -   axios
 -   Router
 -   pinia
+-   [vue3-cookies](https://www.npmjs.com/package/vue3-cookies)
 
 # 로또 번호 추첨 기능
 

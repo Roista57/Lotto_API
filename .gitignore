@@ -222,3 +222,4 @@ docs/_book
 test/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,python,venv,vue
+/.metadata/

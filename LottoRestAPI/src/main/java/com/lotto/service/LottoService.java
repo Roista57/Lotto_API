@@ -1,11 +1,29 @@
 package com.lotto.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class LottoService {
+	
+	public ArrayList<Integer> randomLottoNumber(){
+		ArrayList<Integer> lottoNumber = new ArrayList<>();
+		for (int i = 1; i <= 45; i++) {
+			lottoNumber.add(i);
+		}
+		Collections.shuffle(lottoNumber);
+
+		ArrayList<Integer> ans = new ArrayList<>();
+		for (int i = 0; i < 6; i++) {
+			ans.add(lottoNumber.get(i));
+		}
+		Collections.sort(ans);
+		return ans;
+	}
+	
+	
 	public ArrayList<Integer> convertStringToArrayList(String str) {
         // 대괄호 제거
         str = str.substring(1, str.length() - 2);

@@ -1,7 +1,5 @@
 package com.lotto.controller;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,39 +15,28 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @CrossOrigin("*")
-@Tag(name = "", description = "")
+@Tag(name = "로또 번호 추첨", description = "로또 번호를 추첨하는 컨트롤러")
 @RequestMapping("/lotto")
 public class LottoController {
 	@Autowired
 	private LottoService lservice;
-	
-	private final LottoModelBatch scriptRunner = new LottoModelBatch();
+	@Autowired
+	private LottoModelBatch scriptRunner;
 	
 	// 랜덤한 6개의 숫자를 보내줌
 	@GetMapping("random")
 	@Operation(summary = "", description = "")
-	public ArrayList<Integer> getRandom() {
-		ArrayList<Integer> lottoNumber = new ArrayList<>();
-		for (int i = 1; i <= 45; i++) {
-			lottoNumber.add(i);
-		}
-		Collections.shuffle(lottoNumber);
-
-		ArrayList<Integer> ans = new ArrayList<>();
-		for (int i = 0; i < 6; i++) {
-			ans.add(lottoNumber.get(i));
-		}
-		Collections.sort(ans);
-		return ans;
+	public ArrayList<Integer> getRandomNumber() {
+		return lservice.randomLottoNumber();
 	}
 	
+	// 파이썬을 실행한 결과를 반환해줌
 	@GetMapping("/lstm/random")
-    public ArrayList<Integer> predictLottoNumbers() {
-		String ans = scriptRunner.runPythonScript("F:\\ToyProject\\Lotto API\\LottoCrawling\\load_model.py");
+    public ArrayList<Integer> getScriptLottoNumbers() {
+		String ans = scriptRunner.runPythonScriptLoadModel();
 		if(ans.equals("fail")) {
 			return null;
 		}
         return lservice.convertStringToArrayList(ans);
     }
-
 }

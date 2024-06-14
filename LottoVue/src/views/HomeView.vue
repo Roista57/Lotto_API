@@ -1,11 +1,11 @@
 <script setup>
-import HeaderComp from "@/components/HeaderComp.vue";
+import HeaderView from "./HeaderView.vue";
 import LottoDefaultNumberComp from "@/components/LottoDefaultNumberComp.vue";
 import LottoAiNumberComp from "@/components/LottoAiNumberComp.vue";
 </script>
 
 <template>
-    <HeaderComp></HeaderComp>
+    <HeaderView />
     <LottoDefaultNumberComp />
     <LottoAiNumberComp />
 </template>
